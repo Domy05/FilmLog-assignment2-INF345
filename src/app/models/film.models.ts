@@ -1,3 +1,4 @@
+//interfaces for movie and user account
 export interface Movie {
   id: string;
   title: string;

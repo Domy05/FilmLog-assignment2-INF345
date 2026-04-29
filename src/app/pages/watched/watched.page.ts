@@ -34,6 +34,7 @@ export class WatchedPage implements OnInit {
     await this.loadWatched();
   }
 
+  //reloads list every time entered
   async ionViewWillEnter(): Promise<void> {
     await this.loadWatched();
   }
@@ -43,6 +44,7 @@ export class WatchedPage implements OnInit {
     this.router.navigate(['/movie-details', movie.id], { state: { movie } });
   }
 
+  //removes from the list. its moved back to watchlist and watch count resets
   async remove(movieId: string): Promise<void> {
     if (!this.currentUser) {
       return;
@@ -63,6 +65,7 @@ export class WatchedPage implements OnInit {
     await this.presentToast('Watch count reset and movie moved to watchlist.');
   }
 
+  //this loads the list of watched movies
   private async loadWatched(): Promise<void> {
     if (!this.currentUser) {
       return;
@@ -70,6 +73,7 @@ export class WatchedPage implements OnInit {
     this.movies = await this.storageService.getWatched(this.currentUser);
   }
 
+  //helper to show toast messages
   private async presentToast(message: string): Promise<void> {
     const toast = await this.toastController.create({
       message,

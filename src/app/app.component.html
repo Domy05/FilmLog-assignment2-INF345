@@ -3,11 +3,11 @@
     <ion-toolbar color="dark">
       <ion-title>FilmLog</ion-title>
       <ion-buttons slot="end">
-        <ion-button fill="clear" color="light" routerLink="/login" *ngIf="!isLoggedIn">
+        <ion-button fill="clear" color="light" routerLink="/login" *ngIf="!isLoggedIn">     
           <ion-icon name="person-circle-outline" slot="start"></ion-icon>
           Login
         </ion-button>
-        <ion-button fill="clear" color="light" (click)="logout()" *ngIf="isLoggedIn">
+        <ion-button fill="clear" color="light" (click)="logout()" *ngIf="isLoggedIn">     
           <ion-icon name="log-out-outline" slot="start"></ion-icon>
           Log out
         </ion-button>

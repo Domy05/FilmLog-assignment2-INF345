@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {
+  { //redirect to home page on app start
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
   },
-  {
+  { //default route goes to home page
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
@@ -27,11 +27,12 @@ const routes: Routes = [
     path: 'watchlist',
     loadChildren: () => import('./pages/watchlist/watchlist.module').then( m => m.WatchlistPageModule)
   },
-  {
+  { //new route for watched page
     path: 'watched',
     loadChildren: () => import('./pages/watched/watched.module').then( m => m.WatchedPageModule)
   },
   {
+    //goes to login if no route matches
     path: '**',
     redirectTo: 'login'
   }

@@ -37,6 +37,7 @@ export class Movie {
     );
   }
 
+  //gets movie info by id to show on details page
   setSelectedMovie(movie: MovieModel): void {
     this.selectedMovie = movie;
   }
@@ -45,6 +46,7 @@ export class Movie {
     return this.selectedMovie;
   }
 
+  //links api response to my movie model
   private mapImdbMovie(item: ImdbMovieItem): MovieModel {
     return {
       id: item['#IMDB_ID'] as string,

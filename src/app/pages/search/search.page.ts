@@ -27,6 +27,7 @@ export class SearchPage implements OnInit {
     private toastController: ToastController,
   ) {}
 
+  //checks if user logged in. takes user to login page if not
   async ngOnInit(): Promise<void> {
     this.currentUser = await this.authService.getCurrentUsername();
     if (!this.currentUser) {
@@ -35,6 +36,7 @@ export class SearchPage implements OnInit {
     }
   }
 
+  //searches for movies based on query
   search(): void {
     if (!this.query.trim()) {
       this.results = [];
@@ -56,11 +58,13 @@ export class SearchPage implements OnInit {
     });
   }
 
+  //opens details
   openDetails(movie: MovieModel): void {
     this.movieService.setSelectedMovie(movie);
     this.router.navigate(['/movie-details', movie.id], { state: { movie } });
   }
 
+  //adds to wathc list
   async addToWatchlist(movie: MovieModel): Promise<void> {
     if (!this.currentUser) {
       return;

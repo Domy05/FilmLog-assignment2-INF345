@@ -25,6 +25,7 @@ export class MovieDetailsPage implements OnInit {
     private toastController: ToastController,
   ) {}
 
+  //loads detials if logged in. if not then takes person to login page
   async ngOnInit(): Promise<void> {
     this.currentUser = await this.authService.getCurrentUsername();
     if (!this.currentUser) {
@@ -45,6 +46,7 @@ export class MovieDetailsPage implements OnInit {
     }
   }
 
+  //opens details
   async addToWatchlist(): Promise<void> {
     if (!this.currentUser || !this.movie) {
       return;
@@ -54,6 +56,7 @@ export class MovieDetailsPage implements OnInit {
     await this.presentToast(added ? 'Added to watchlist.' : 'Movie is already tracked.');
   }
 
+  //moves to watched list. increases watch count if already there
   async markAsWatched(): Promise<void> {
     if (!this.currentUser || !this.movie) {
       return;

@@ -24,6 +24,7 @@ export class WatchlistPage implements OnInit {
     private toastController: ToastController,
   ) {}
 
+  //checks if user logged in. loads watchlist. if not then takes person to login page
   async ngOnInit(): Promise<void> {
     this.currentUser = await this.authService.getCurrentUsername();
     if (!this.currentUser) {
@@ -34,15 +35,18 @@ export class WatchlistPage implements OnInit {
     await this.loadWatchlist();
   }
 
+  //reloads list every time entered
   async ionViewWillEnter(): Promise<void> {
     await this.loadWatchlist();
   }
 
+  //to check its details
   openDetails(movie: MovieModel): void {
     this.movieService.setSelectedMovie(movie);
     this.router.navigate(['/movie-details', movie.id], { state: { movie } });
   }
 
+  //removes from watchlist
   async remove(movieId: string): Promise<void> {
     if (!this.currentUser) {
       return;
@@ -61,6 +65,7 @@ export class WatchlistPage implements OnInit {
     await this.presentToast('Moved to watched list.');
   }
 
+  //resets watch count and moves movie back to watchlist
   private async loadWatchlist(): Promise<void> {
     if (!this.currentUser) {
       return;
@@ -68,6 +73,7 @@ export class WatchlistPage implements OnInit {
     this.movies = await this.storageService.getWatchlist(this.currentUser);
   }
 
+  //helper to show toast messages
   private async presentToast(message: string): Promise<void> {
     const toast = await this.toastController.create({
       message,

@@ -20,8 +20,8 @@ export class HomePage implements OnInit, OnDestroy {
   currentUser: string | null = null;
   private destroy$ = new Subject<void>();
 
-  // Common search terms for random selection
-  private searchTerms = ['movie', 'film', 'action', 'drama', 'comedy', 'thriller', 'adventure', 'mystery', 'romance', 'superhero'];
+  //pre searched terms to get random movies to show
+  private searchTerms = ['dogs', 'hero', 'action', 'anime', 'comedy', 'thriller','cats', 'cars', 'kdrama', 'super', 'romance', 'minecraft'];
 
   constructor(
     private movieService: Movie,
@@ -31,6 +31,7 @@ export class HomePage implements OnInit, OnDestroy {
     private toastController: ToastController,
   ) {}
 
+  //checks if user logged in. takes user to login page if not. loads random movies
   async ngOnInit(): Promise<void> {
     this.currentUser = await this.authService.getCurrentUsername();
     if (!this.currentUser) {
@@ -41,11 +42,13 @@ export class HomePage implements OnInit, OnDestroy {
     this.loadRandomMovies();
   }
 
+  //reloads random movies every time entered
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
+  
   loadRandomMovies(): void {
     const randomTerm = this.searchTerms[Math.floor(Math.random() * this.searchTerms.length)];
     this.isLoading = true;

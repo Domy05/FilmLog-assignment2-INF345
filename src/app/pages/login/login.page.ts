@@ -22,12 +22,14 @@ export class LoginPage implements OnInit {
     private toastController: ToastController,
   ) {}
 
+  //checks if user logged in. takes user to login page if not
   async ngOnInit(): Promise<void> {
     if (await this.authService.isAuthenticated()) {
       await this.router.navigateByUrl('/search', { replaceUrl: true });
     }
   }
 
+  //deals with login and signup. checks if passwords match when signing up
   async submit(): Promise<void> {
     if (this.isSubmitting) {
       return;

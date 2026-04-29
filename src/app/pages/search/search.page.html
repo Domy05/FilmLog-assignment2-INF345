@@ -19,7 +19,7 @@
 
     <div class="center-note" *ngIf="isLoading">
       <ion-spinner name="crescent"></ion-spinner>
-      <p>Loading movies...</p>
+      <p>loading movies...</p>
     </div>
 
     <div class="search-results" *ngIf="!isLoading && results.length">
@@ -45,6 +45,7 @@
       </div>
     </div>
 
+    
     <div class="center-note" *ngIf="!isLoading && !results.length && !errorMessage">
       <ion-icon name="search-outline" style="font-size: 48px;"></ion-icon>
       <p>Search for movies to get started</p>

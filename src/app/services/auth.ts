@@ -11,7 +11,7 @@ export class Auth {
   async signUp(username: string, password: string): Promise<{ ok: boolean; message: string }> {
     const trimmedUsername = username.trim().toLowerCase();
     if (!trimmedUsername || !password) {
-      return { ok: false, message: 'Please provide a username and password.' };
+      return { ok: false, message: 'Provide a username and password.' };
     }
 
     const users = await this.storageService.getUsers();
@@ -26,6 +26,7 @@ export class Auth {
 
     return { ok: true, message: 'Account created successfully.' };
   }
+
 
   async login(username: string, password: string): Promise<{ ok: boolean; message: string }> {
     const trimmedUsername = username.trim().toLowerCase();
@@ -43,6 +44,8 @@ export class Auth {
     return { ok: true, message: 'Login successful.' };
   }
 
+  //clears current user from LS when logging out
+  //keeps watchlist and watched in LS tho
   async logout(): Promise<void> {
     await this.storageService.setCurrentUser(null);
   }
