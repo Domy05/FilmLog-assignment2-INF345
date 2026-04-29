@@ -1,32 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Storage as IonicStorage } from '@ionic/storage-angular';
 import { Movie, UserAccount } from '../models/film.models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Storage {
-  private storageReady = false;
-
   private readonly USERS_KEY = 'filmlog_users';
   private readonly CURRENT_USER_KEY = 'filmlog_current_user';
 
-  constructor(private ionicStorage: IonicStorage) {}
-
-  async init(): Promise<void> {
-    if (this.storageReady) {
-      return;
-    }
-
-    await this.ionicStorage.create();
-    this.storageReady = true;
-  }
-
-  private async ensureInit(): Promise<void> {
-    if (!this.storageReady) {
-      await this.init();
-    }
-  }
+  constructor() {}
 
   private getWatchlistKey(username: string): string {
     return `filmlog_watchlist_${username}`;
@@ -37,47 +19,42 @@ export class Storage {
   }
 
   async getUsers(): Promise<UserAccount[]> {
-    await this.ensureInit();
-    return (await this.ionicStorage.get(this.USERS_KEY)) ?? [];
+    const data = localStorage.getItem(this.USERS_KEY);
+    return data ? JSON.parse(data) : [];
   }
 
   async saveUsers(users: UserAccount[]): Promise<void> {
-    await this.ensureInit();
-    await this.ionicStorage.set(this.USERS_KEY, users);
+    localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
   }
 
   async getCurrentUser(): Promise<string | null> {
-    await this.ensureInit();
-    return (await this.ionicStorage.get(this.CURRENT_USER_KEY)) ?? null;
+    return localStorage.getItem(this.CURRENT_USER_KEY) ?? null;
   }
 
   async setCurrentUser(username: string | null): Promise<void> {
-    await this.ensureInit();
     if (!username) {
-      await this.ionicStorage.remove(this.CURRENT_USER_KEY);
+      localStorage.removeItem(this.CURRENT_USER_KEY);
       return;
     }
-    await this.ionicStorage.set(this.CURRENT_USER_KEY, username);
+    localStorage.setItem(this.CURRENT_USER_KEY, username);
   }
 
   async getWatchlist(username: string): Promise<Movie[]> {
-    await this.ensureInit();
-    return (await this.ionicStorage.get(this.getWatchlistKey(username))) ?? [];
+    const data = localStorage.getItem(this.getWatchlistKey(username));
+    return data ? JSON.parse(data) : [];
   }
 
   async saveWatchlist(username: string, movies: Movie[]): Promise<void> {
-    await this.ensureInit();
-    await this.ionicStorage.set(this.getWatchlistKey(username), movies);
+    localStorage.setItem(this.getWatchlistKey(username), JSON.stringify(movies));
   }
 
   async getWatched(username: string): Promise<Movie[]> {
-    await this.ensureInit();
-    return (await this.ionicStorage.get(this.getWatchedKey(username))) ?? [];
+    const data = localStorage.getItem(this.getWatchedKey(username));
+    return data ? JSON.parse(data) : [];
   }
 
   async saveWatched(username: string, movies: Movie[]): Promise<void> {
-    await this.ensureInit();
-    await this.ionicStorage.set(this.getWatchedKey(username), movies);
+    localStorage.setItem(this.getWatchedKey(username), JSON.stringify(movies));
   }
 
   async addToWatchlist(username: string, movie: Movie): Promise<boolean> {
