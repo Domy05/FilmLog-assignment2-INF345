@@ -1,3 +1,32 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-header class="app-header">
+    <ion-toolbar color="dark">
+      <ion-title>FilmLog</ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" color="light" routerLink="/login" *ngIf="!isLoggedIn">
+          <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+          Login
+        </ion-button>
+        <ion-button fill="clear" color="light" (click)="logout()" *ngIf="isLoggedIn">
+          <ion-icon name="log-out-outline" slot="start"></ion-icon>
+          Log out
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-page">
+    <ion-router-outlet></ion-router-outlet>
+  </div>
+
+  <ion-footer class="tab-footer">
+    <ion-toolbar color="dark">
+      <ion-segment [value]="activeTab">
+        <ion-segment-button *ngFor="let item of tabs" [value]="item.route" [routerLink]="item.route" routerDirection="root">
+          <ion-icon [name]="item.icon"></ion-icon>
+          <ion-label>{{ item.title }}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-footer>
 </ion-app>

@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>My Watchlist</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="watchlist-page">
+  <ion-list *ngIf="movies.length; else emptyList" lines="none">
+    <ion-item *ngFor="let movie of movies">
+      <ion-thumbnail slot="start">
+        <img [src]="movie.poster || 'assets/icon/favicon.png'" [alt]="movie.title" />
+      </ion-thumbnail>
+
+      <ion-label>
+        <h2>{{ movie.title }}</h2>
+        <p>{{ movie.year || 'Unknown year' }}</p>
+      </ion-label>
+
+      <div slot="end" class="row-actions">
+        <ion-button size="small" color="primary" (click)="openDetails(movie)">Details</ion-button>
+        <ion-button size="small" color="success" (click)="markWatched(movie)">Watched</ion-button>
+        <ion-button size="small" color="danger" fill="outline" (click)="remove(movie.id)">Remove</ion-button>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #emptyList>
+    <div class="empty-state">
+      <ion-icon name="bookmark-outline"></ion-icon>
+      <h3>No movies in your watchlist</h3>
+      <p>Search movies and add titles you plan to watch.</p>
+      <ion-button routerLink="/search">Go to Search</ion-button>
+    </div>
+  </ng-template>
+</ion-content>

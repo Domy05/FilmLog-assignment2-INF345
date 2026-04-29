@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="home-page">
+  <div class="content-wrap">
+    <div class="home-header">
+      <h1>Discover Movies</h1>
+      <p>Get inspired with random movie picks</p>
+    </div>
+
+    <ion-text color="danger" *ngIf="errorMessage">
+      <p>{{ errorMessage }}</p>
+    </ion-text>
+
+    <div class="loading-state" *ngIf="isLoading">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Loading movies...</p>
+    </div>
+
+    <button
+      ion-button
+      color="primary"
+      class="refresh-btn"
+      *ngIf="!isLoading && randomMovies.length"
+      (click)="loadRandomMovies()"
+    >
+      <ion-icon name="refresh" slot="start"></ion-icon>
+      Load More
+    </button>
+
+    <div class="search-results" *ngIf="!isLoading && randomMovies.length">
+      <div class="movie-card" *ngFor="let movie of randomMovies">
+        <img
+          class="movie-card-image"
+          [src]="movie.poster || 'assets/icon/favicon.png'"
+          [alt]="movie.title"
+          (click)="openDetails(movie)"
+        />
+        <div class="movie-card-content">
+          <h2 class="movie-card-title">{{ movie.title }}</h2>
+          <p class="movie-card-year">{{ movie.year || 'N/A' }}</p>
+          <div class="movie-card-actions">
+            <ion-button size="small" color="primary" (click)="openDetails(movie)">
+              Details
+            </ion-button>
+            <ion-button size="small" (click)="addToWatchlist(movie)">
+              Add
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="loading-state" *ngIf="!isLoading && !randomMovies.length && !errorMessage">
+      <ion-icon name="film-outline" style="font-size: 48px;"></ion-icon>
+      <p>No movies loaded</p>
+    </div>
+  </div>
+</ion-content>

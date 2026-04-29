@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>FilmLog Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="login-page" [fullscreen]="true">
+  <div class="login-wrapper">
+    <h1>Welcome to FilmLog</h1>
+    <p>Sign in or create your account to manage your movie journey.</p>
+
+    <ion-segment [(ngModel)]="mode" mode="ios">
+      <ion-segment-button value="login">
+        <ion-label>Login</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="signup">
+        <ion-label>Sign Up</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-list lines="none">
+      <ion-item>
+        <ion-input
+          [(ngModel)]="username"
+          label="Username"
+          labelPlacement="stacked"
+          placeholder="Enter username"
+          type="text"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          [(ngModel)]="password"
+          label="Password"
+          labelPlacement="stacked"
+          placeholder="Enter password"
+          type="password"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="mode === 'signup'">
+        <ion-input
+          [(ngModel)]="confirmPassword"
+          label="Confirm Password"
+          labelPlacement="stacked"
+          placeholder="Confirm password"
+          type="password"
+        ></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="block" size="large" (click)="submit()" [disabled]="isSubmitting">
+      {{ mode === 'login' ? 'Log In' : 'Create Account' }}
+    </ion-button>
+  </div>
+</ion-content>

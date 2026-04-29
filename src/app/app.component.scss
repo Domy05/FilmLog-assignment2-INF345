@@ -1,0 +1,112 @@
+.app-header ion-toolbar:first-child {
+	--min-height: 56px;
+	--background: #2d3436;
+	--color: #ecf0f1;
+}
+
+.tab-footer {
+	position: sticky;
+	bottom: 0;
+	z-index: 10;
+	--background: #2d3436;
+}
+
+.tab-footer ion-toolbar {
+	--min-height: 60px;
+	--padding-start: 0;
+	--padding-end: 0;
+	--padding-top: 0;
+	--padding-bottom: 0;
+	--background: #2d3436;
+}
+
+ion-segment {
+	padding: 2px 2px;
+	margin: 0;
+	background: transparent;
+	border-radius: 0;
+	width: 100%;
+	display: flex;
+	overflow-x: auto;
+	gap: 0;
+}
+
+ion-segment-button {
+	--indicator-color: #af7ac5;
+	--color: rgba(236, 240, 241, 0.65);
+	--color-checked: #ecf0f1;
+	--background: transparent;
+	--background-checked: rgba(142, 68, 173, 0.2);
+	border-radius: 0;
+	margin: 0;
+	text-transform: none;
+	min-height: 58px;
+	font-size: 0.65rem;
+	flex: 1;
+	min-width: 0;
+	padding: 0 4px;
+}
+
+ion-segment-button ion-label {
+	margin: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: none;
+}
+
+ion-segment-button ion-icon {
+	font-size: 1.1rem;
+	margin-right: 0;
+	margin-bottom: 2px;
+}
+
+@media (max-width: 768px) {
+	.tab-footer ion-toolbar {
+		--min-height: 56px;
+	}
+
+	ion-segment {
+		padding: 2px 0;
+	}
+
+	ion-segment-button {
+		min-height: 54px;
+		font-size: 0.6rem;
+		padding: 0 2px;
+	}
+
+	ion-segment-button ion-icon {
+		font-size: 1rem;
+		margin-right: 0;
+	}
+
+	ion-segment-button ion-label {
+		display: none;
+	}
+}
+
+@media (max-width: 480px) {
+	.tab-footer ion-toolbar {
+		--min-height: 52px;
+	}
+
+	ion-segment {
+		padding: 2px 0;
+	}
+
+	ion-segment-button {
+		min-height: 50px;
+		font-size: 0.55rem;
+		padding: 0;
+	}
+
+	ion-segment-button ion-icon {
+		font-size: 0.95rem;
+		margin-right: 0;
+	}
+
+	ion-segment-button ion-label {
+		display: none;
+	}
+}

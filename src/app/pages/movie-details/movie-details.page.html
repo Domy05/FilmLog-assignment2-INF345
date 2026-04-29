@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/search"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Movie Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="details-page" [fullscreen]="true">
+  <ion-card *ngIf="movie; else noMovie">
+    <div class="poster-wrap">
+      <img [src]="movie.poster || 'assets/icon/favicon.png'" [alt]="movie.title" />
+      <ion-button class="poster-back" fill="clear" (click)="goHome()" aria-label="Back to home">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    <ion-card-header>
+      <ion-card-title>{{ movie.title }}</ion-card-title>
+      <ion-card-subtitle>{{ movie.year || 'Unknown year' }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p><strong>Cast:</strong> {{ movie.cast || 'No cast details available.' }}</p>
+      <p *ngIf="movie.rank"><strong>IMDb Rank:</strong> {{ movie.rank }}</p>
+
+      <ion-button expand="block" (click)="addToWatchlist()">Add to Watchlist</ion-button>
+      <ion-button expand="block" color="success" (click)="markAsWatched()">Mark as Watched</ion-button>
+      <ion-button
+        *ngIf="movie.imdbUrl"
+        class="imdb-button"
+        expand="block"
+        [href]="movie.imdbUrl"
+        target="_blank"
+      >
+        Open IMDb
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ng-template #noMovie>
+    <div class="empty-state">
+      <ion-icon name="film-outline"></ion-icon>
+      <h3>Movie not found</h3>
+      <p>Return to Search and choose a movie again.</p>
+      <ion-button routerLink="/search">Back to Search</ion-button>
+    </div>
+  </ng-template>
+</ion-content>

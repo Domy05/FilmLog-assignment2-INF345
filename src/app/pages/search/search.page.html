@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Search Movies</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="search-page">
+  <div class="content-wrap">
+    <ion-searchbar
+      [(ngModel)]="query"
+      (ionInput)="search()"
+      placeholder="Search title..."
+      debounce="350"
+    ></ion-searchbar>
+
+    <ion-text color="danger" *ngIf="errorMessage">
+      <p>{{ errorMessage }}</p>
+    </ion-text>
+
+    <div class="center-note" *ngIf="isLoading">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Loading movies...</p>
+    </div>
+
+    <div class="search-results" *ngIf="!isLoading && results.length">
+      <div class="movie-card" *ngFor="let movie of results">
+        <img
+          class="movie-card-image"
+          [src]="movie.poster || 'assets/icon/favicon.png'"
+          [alt]="movie.title"
+          (click)="openDetails(movie)"
+        />
+        <div class="movie-card-content">
+          <h2 class="movie-card-title">{{ movie.title }}</h2>
+          <p class="movie-card-year">{{ movie.year || 'N/A' }}</p>
+          <div class="movie-card-actions">
+            <ion-button size="small" color="primary" (click)="openDetails(movie)">
+              Details
+            </ion-button>
+            <ion-button size="small" (click)="addToWatchlist(movie)">
+              Add
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="center-note" *ngIf="!isLoading && !results.length && !errorMessage">
+      <ion-icon name="search-outline" style="font-size: 48px;"></ion-icon>
+      <p>Search for movies to get started</p>
+    </div>
+  </div>
+</ion-content>

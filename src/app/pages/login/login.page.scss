@@ -1,0 +1,89 @@
+.login-page {
+	--background: #2d3436;
+}
+
+.login-wrapper {
+	max-width: 540px;
+	margin: 0 auto;
+	padding: 24px 18px 40px;
+}
+
+.login-wrapper h1 {
+	margin: 6px 0;
+	font-size: 1.7rem;
+	font-weight: 800;
+	color: #af7ac5;
+}
+
+.login-wrapper p {
+	margin: 0 0 18px;
+	color: #ecf0f1;
+}
+
+ion-segment {
+	margin-bottom: 18px;
+	background: #34495e;
+	border-radius: 12px;
+}
+
+ion-segment-button {
+	--color: rgba(236, 240, 241, 0.65);
+	--color-checked: #ecf0f1;
+	--background: transparent;
+	--background-checked: rgba(142, 68, 173, 0.2);
+	--indicator-color: #af7ac5;
+}
+
+ion-list {
+	background: transparent;
+	margin-bottom: 8px;
+}
+
+ion-item {
+	--background: #34495e;
+	--color: #ecf0f1;
+	--border-radius: 12px;
+	margin-bottom: 12px;
+	border-radius: 12px;
+}
+
+ion-label {
+	color: #ecf0f1;
+}
+
+ion-input {
+	--color: #ecf0f1;
+}
+
+ion-input::placeholder {
+	color: rgba(236, 240, 241, 0.5);
+}
+
+ion-button {
+	--background: #8e44ad;
+	--color: #ecf0f1;
+	--border-radius: 12px;
+	margin-top: 12px;
+}
+
+ion-button:hover {
+	--background: #9b59b6;
+}
+
+ion-text[color="danger"] {
+	color: #e74c3c;
+}
+
+@media (max-width: 480px) {
+	.login-wrapper {
+		padding: 16px 12px 32px;
+	}
+
+	.login-wrapper h1 {
+		font-size: 1.5rem;
+	}
+
+	ion-item {
+		margin-bottom: 10px;
+	}
+}

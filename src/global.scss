@@ -34,4 +34,62 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+/* @import "@ionic/angular/css/palettes/dark.system.css"; */
+
+/* Global dark gray and purple theme */
+html {
+	--ion-background-color: #2d3436;
+	--ion-text-color: #ecf0f1;
+	--ion-color-step-50: #3d4e56;
+	--ion-color-step-100: #44546b;
+	--ion-color-step-150: #4a5b72;
+}
+
+body {
+	background-color: #2d3436;
+	color: #ecf0f1;
+}
+
+* {
+	--ion-text-color: #ecf0f1;
+}
+
+ion-content {
+	--background: #2d3436;
+	--padding-bottom: calc(96px + env(safe-area-inset-bottom));
+}
+
+ion-toolbar {
+	--background: #2d3436;
+	--color: #ecf0f1;
+}
+
+ion-card {
+	--background: #34495e;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+ion-button[color="primary"] {
+	--background: #8e44ad;
+	--color: #ecf0f1;
+}
+
+ion-button[color="danger"] {
+	--background: #e74c3c;
+	--color: #ecf0f1;
+}
+
+ion-button[color="success"] {
+	--background: #27ae60;
+	--color: #ecf0f1;
+}
+
+/* Make Ionic toast message text white for better contrast on dark backgrounds */
+ion-toast::part(message) {
+  color: #ecf0f1;
+}
+
+/* Optional: slightly darker toast background to improve readability */
+ion-toast {
+  --background: rgba(45, 52, 54, 0.95);
+}

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Watched List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="watched-page">
+  <ion-list *ngIf="movies.length; else noWatched" lines="none">
+    <ion-item *ngFor="let movie of movies">
+      <ion-thumbnail slot="start">
+        <img [src]="movie.poster || 'assets/icon/favicon.png'" [alt]="movie.title" />
+      </ion-thumbnail>
+
+      <ion-label>
+        <h2>{{ movie.title }}</h2>
+        <p>{{ movie.year || 'Unknown year' }}</p>
+        <p class="times">Times Watched: {{ movie.timesWatched || 0 }}</p>
+      </ion-label>
+
+      <div slot="end" class="row-actions">
+        <ion-button size="small" fill="outline" (click)="openDetails(movie)">Details</ion-button>
+        <ion-button size="small" color="warning" (click)="reset(movie.id)">Reset</ion-button>
+        <ion-button size="small" color="danger" fill="clear" (click)="remove(movie.id)">Remove</ion-button>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noWatched>
+    <div class="empty-state">
+      <ion-icon name="checkmark-done-outline"></ion-icon>
+      <h3>No watched movies yet</h3>
+      <p>Mark movies as watched to track your progress.</p>
+      <ion-button routerLink="/watchlist">Go to Watchlist</ion-button>
+    </div>
+  </ng-template>
+</ion-content>
